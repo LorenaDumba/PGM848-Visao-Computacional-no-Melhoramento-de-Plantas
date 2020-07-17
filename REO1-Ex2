@@ -1,0 +1,163 @@
+########################################################################################################################
+# DATA: 17/07/2020
+# DISCIPLINA: PGM848 - VISÃO COMPUTACIONAL NO MELHORAMENTO DE PLANTAS
+# PROFESSOR: VINÍCIUS QUINTÃO CARNEIRO
+# ESTUDANTE: LORENA CAROLINE DUMBA SILVA
+# GITHUB: LorenaDumba
+########################################################################################################################
+
+import numpy as np
+
+print("REO 1")
+
+print("EXERCÍCIO 2")
+
+
+print("a)Declare a matriz abaixo com a biblioteca numpy.")
+      "1 3 22"
+      "2 8 18"
+      "3 4 22"
+      "4 1 23"
+      "5 2 52"
+      "6 2 18"
+      "7 2 25")
+
+matriz1 = np.array([[1,3,22],
+                   [2,8,18],
+                   [3,4,22],
+                   [4,1,23],
+                   [5,2,52],
+                   [6,2,18],
+                   [7,2,25]])
+
+print(matriz1)
+
+print("")
+print("--------------------------------------------------------------------------------------------------------------")
+print("")
+
+
+print("b)Obtenha o número de linhas e de colunas desta matriz")
+
+nl,nc = np.shape(matriz1)
+print("Número de linhas são:", nl)
+print("Número de colunas são:", nc)
+
+print("")
+print("--------------------------------------------------------------------------------------------------------------")
+print("")
+
+
+print("c)Obtenha as médias das colunas 2 e 3.")
+
+med2 = np.mean(matriz1[0:,1])
+med3 = np.mean(matriz1[0:,2])
+
+print("A média da coluna 2 é: ", med2)
+print("A média da coluna 3 é: ", med3)
+
+print("")
+print("--------------------------------------------------------------------------------------------------------------")
+print("")
+
+
+print("d)Obtenha as médias das linhas considerando somente as colunas 2 e 3")
+print("Linha   Média")
+
+l1 = np.mean(matriz1[0,1:3])
+l2 = np.mean(matriz1[1,1:3])
+l3 = np.mean(matriz1[2,1:3])
+l4 = np.mean(matriz1[3,1:3])
+l5 = np.mean(matriz1[4,1:3])
+l6 = np.mean(matriz1[5,1:3])
+l7 = np.mean(matriz1[6,1:3])
+
+print("  1     ", l1)
+print("  2     ", l2)
+print("  3     ", l3)
+print("  4     ", l4)
+print("  5     ", l5)
+print("  6     ", l6)
+print("  7     ", l7)
+
+print("")
+print("--------------------------------------------------------------------------------------------------------------")
+print("")
+
+
+print("e)Considerando que a primeira coluna seja a identificação de genótipos, a segunda nota de severidade de uma doença e"
+      "e a terceira peso de 100 grãos. Obtenha os genótipos que possuem nota de severidade inferior a 5.")
+
+severidade = matriz1[0:,1]<5
+position = np.where(severidade)
+severidade_bool = matriz1[position]
+
+print("Os genótipos com nota de severidade inferior a 5 são:", severidade_bool[0:,0])
+
+print("")
+print("--------------------------------------------------------------------------------------------------------------")
+print("")
+
+
+print("f)Considerando que a primeira coluna seja a identificação de genótipos, a segunda nota de severidade de uma doença e"
+      "a terceira peso de 100 grãos. Obtenha os genótipos que possuem nota de peso de 100 grãos superior ou igual a 22.")
+
+superior_igual_22 = matriz1[0:,2]>=22
+print(superior_igual_22)
+big_position=np.where(superior_igual_22)
+superior_igual_bool = matriz1[big_position]
+print(superior_igual_bool)
+
+print("")
+print("Os genótipos que possuem nota de peso de 100 grãos superior ou igual a 22 são:", superior_igual_bool[0:,0])
+print("")
+print("--------------------------------------------------------------------------------------------------------------")
+print("")
+
+print("g)Considerando que a primeira coluna seja a identificação de genótipos, a segunda nota de severidade de uma doença e")
+print("a terceira peso de 100 grãos. Obtenha os genótipos que possuem nota de severidade igual ou inferior a 3 e peso de 100")
+print("grãos igual ou superior a 22.")
+
+severidade_nota3 = gen_bool[0:,1]<=3
+matriz_new = np.where(severidade_nota3)
+matrix = gen_bool[matriz_new]
+print(matrix)
+
+print("")
+print("Os genótipos que possuem nota de severidade igual ou inferior a 3 e peso de 100 grãos igual ou superior a 22 são:", matrix[0:,0])
+
+print("")
+print("--------------------------------------------------------------------------------------------------------------")
+print("")
+
+
+print("h)Crie uma estrutura de repetição com uso do for (loop) para apresentar na tela cada uma das posições da matriz e o seu")
+print("respectivo valor. Utilize um iterador para mostrar ao usuário quantas vezes está sendo repetido.")
+print("Apresente a seguinte mensagem a cada iteração {Na linha X e na coluna Y ocorre o valor: Z}")
+print("Nesta estrutura crie uma lista que armazene os genótipos com peso de 100 grãos igual ou superior a 25")
+
+import time
+contador = 0
+
+matriz_repeticao = np.zeros((nl,nc))
+
+for i in np.arange(0,nl,1):
+    for j in np.arange(0,nc,1):
+        contador += 1
+        print('Iteração: '+ str(contador))
+        print('Na linha ' + str(i) + ' e na coluna ' + str(j) + ' ocorre o valor: ' + str(matriz1[int(i),int(j)]))
+        time.sleep(0.5)
+        matriz_repeticao[int(i),int(j)] = (matriz1[int(i),int(j)])**2
+
+print("")
+print("--------------------------------------------------------------------------------------------------------------")
+print("")
+
+np.set_printoptions(precision=2)
+np.set_printoptions(suppress=True)
+print(matriz1)
+
+print("----------------------------------------------------")
+
+print(matriz_repeticao)
+print("")
