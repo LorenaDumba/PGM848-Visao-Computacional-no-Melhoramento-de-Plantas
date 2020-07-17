@@ -1,0 +1,157 @@
+#######################################################################################################################
+# DATA: 17/07/2020
+# DISCIPLINA: PGM848 - VISÃO COMPUTACIONAL NO MELHORAMENTO DE PLANTAS
+# PROFESSOR: VINÍCIUS QUINTÃO CARNEIRO
+# ESTUDANTE: LORENA CAROLINE DUMBA SILVA
+# GITHUB: LorenaDumba
+########################################################################################################################
+
+import numpy as np
+
+print("REO 1")
+
+print("Exercício 1")
+
+print("a)Declare os valores 43.5,150.30,17,28,35,79,20,99.07,15 como um array numpy.")
+
+vetor = np.array([43.5,150.30,17,28,35,79,20,99.07,15])
+print("O vetor é", vetor)
+
+print("")
+print("---------------------------------------------------------------------------------------------------------------")
+print("")
+
+
+print("b)Obtenha as informações de dimensão, média, máximo, mínimo e variância deste vetor.")
+
+dimensao = len(vetor)
+
+print("A dimesão dos valores do vetor é:", str(dimensao))
+print("A média dos valores do vetor é:", np.mean(vetor))
+print("O valor máximo do vetor é:", np.max(vetor))
+print("O valor mínimo do vetor é:", np.min(vetor))
+print("A variância é:", np.var(vetor))
+
+print("")
+print("---------------------------------------------------------------------------------------------------------------")
+print("")
+
+
+print("c)Obtenha um novo vetor em que cada elemento é dado pelo quadrado da diferença entre cada elemento do vetor "
+      "declarado na letra a e o valor da média deste.")
+
+vetor_np = (vetor - np.mean(vetor))**2
+print("O novo vetor é:", vetor_np)
+
+print("")
+print("---------------------------------------------------------------------------------------------------------------")
+print("")
+
+
+print("d)Obtenha um novo vetor que contenha todos os valores superiores a 30.")
+
+bool_vetor = vetor>30
+maior_vetor = vetor[bool_vetor]
+
+print("O novo vetor com os valores suoperiores a 30 é:" , maior_vetor)
+
+print("")
+print("---------------------------------------------------------------------------------------------------------------")
+print("")
+
+
+print("e)Identifique quais as posições do vetor original possuem valores superiores a 30.")
+
+posicoes = np.where(vetor>30)
+print("As posições do vetor original que possuem valores superiores a 30 são:", posicoes[0])
+
+print("")
+print("---------------------------------------------------------------------------------------------------------------")
+print("")
+
+
+print("f)Apresente um vetor que contenha os valores da primeira, quinta e última posição.")
+
+vetor1 = (vetor[0])
+vetor5 = vetor[4]
+vetor_ultima = vetor[8]
+apresente_vetor = vetor1, vetor5, vetor_ultima
+print("O vetor com os valore da posição primeira, quinta e última posição são:", apresente_vetor)
+print("")
+print("---------------------------------------------------------------------------------------------------------------")
+print("")
+
+
+print("g)Crie uma estrutura de repetição usando o for para apresentar cada valor e a sua respectiva posição durante as iterações")
+
+import time
+it=0
+
+for i in range(0,len(vetor),1):
+    it = it + 1
+    print('Iteração: ' + str(it))
+    print('A posição ' + str(i) + ' contém o elemento: ' + str(vetor[int(i)]))
+    time.sleep(0.5)
+
+print("")
+print("---------------------------------------------------------------------------------------------------------------")
+print("")
+
+
+print("h)Crie uma estrutura de repetição usando o for para fazer a soma dos quadrados de cada valor do vetor.")
+
+it = 0
+somador = 0
+
+for i in range(0,len(vetor),1):
+    it = it + 1
+    soma = soma + vetor[int(i)] ** 2
+    print('Iteração: ' + str(it))
+    print('Aposição ' + str(i) + ' contém o valor: ' + str(vetor[int(i)]))
+    time.sleep(0.5)
+
+print("  ")
+
+print("A soma de quadrado dos valores do vetor é: ", soma)
+
+print("")
+print("---------------------------------------------------------------------------------------------------------------")
+print("")
+
+
+print("i)Crie uma estrutura de repetição usando o while para apresentar todos os valores do vetor")
+
+print("Seguem os valores do vetor: ")
+
+pos = 0
+
+while vetor[pos] != 100:
+    print(vetor[pos])
+    pos = pos + 1
+    time.sleep(0.5)
+
+    if pos == (len(vetor)):
+        print('A posição é: ' + str(pos)+ ' - essa condição retornou true. Sair do while')
+        break
+
+print("")
+print("---------------------------------------------------------------------------------------------------------------")
+print("")
+
+
+print("j)Crie um sequência de valores com mesmo tamanho do vetor original e que inicie em 1 e o passo seja também 1.")
+
+sequencia = np.array(np.arange(1,len(vetor)+1,1))
+
+print("Novo vetor:", sequencia)
+
+print("")
+print("---------------------------------------------------------------------------------------------------------------")
+print("")
+
+
+print("k) Concatene o vetor da letra a com o vetor da letra j.")
+
+concatene = np.concatenate ((vetor,n_seq), axis=0)
+print("O vetor concatenado das letra a e j é:", concatene)
+
