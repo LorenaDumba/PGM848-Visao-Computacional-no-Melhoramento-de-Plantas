@@ -1,0 +1,245 @@
+########################################################################################################################
+# DATA: 17/07/2020
+# DISCIPLINA: PGM848 - VISÃO COMPUTACIONAL NO MELHORAMENTO DE PLANTAS
+# PROFESSOR: VINÍCIUS QUINTÃO CARNEIRO
+# ESTUDANTE: LORENA CAROLINE DUMBA SILVA
+# GITHUB: LorenaDumba
+########################################################################################################################
+
+import numpy as np
+
+print(REO 1")
+
+print("EXERCÍCIO 4")
+
+
+
+print("a) O arquivo dados.txt contem a avaliação de genótipos (primeira coluna) em repetições (segunda coluna) quanto a quatro"
+      "variáveis (terceira coluna em diante). Portanto, carregue o arquivo dados.txt com a biblioteca numpy, apresente os dados e obtenha as informações"
+      "de dimensão desta matriz.")
+
+import numpy as np
+dados_ex4 =np.loadtxt('dados.txt')
+
+nl, nc = dados_ex4.shape
+print(dados_ex4)
+print("")
+print("N° de linhas: ", nl)
+print("N° de colunas: ", nc)
+
+print("")
+print("---------------------------------------------------------------------------------------------------------------")
+print("")
+
+
+print("b) Pesquise sobre as funções np.unique e np.where da biblioteca numpy")
+print("As funções:")
+
+print("np.unique= é capaz de identificar (objetos) repetidos dentro do array")
+print("np.where= é capaz de retornar uma condição de um vetor booleano")
+
+pprint("")
+print("---------------------------------------------------------------------------------------------------------------")
+print("")
+
+
+print("c) Obtenha de forma automática os genótipos e quantas repetições foram avaliadas")
+
+print("O experimento foi feito com ", len(np.unique(dados_ex4[:,1])), " repetições")
+
+print("")
+print("---------------------------------------------------------------------------------------------------------------")
+print("")
+
+
+
+print("d) Apresente uma matriz contendo somente as colunas 1, 2 e 4")
+
+
+sub_dados=dados_ex4[:,[0,1,3]]
+print(sub_dados)
+
+print("")
+print("---------------------------------------------------------------------------------------------------------------")
+print("")
+
+
+print("e) Obtenha uma matriz que contenha o máximo, o mínimo, a média e a variância de cada genótipo para a variavel da coluna 4. Salve esta matriz em bloco de notas.")
+
+nl2,nc2=np.shape(sub_dados)
+print(nl2)
+mat=np.zeros((10,4))
+it=0
+genotipo= np.reshape(np.unique(dados_ex4[:,0], axis=0),(10,1))
+
+#print(genotipo)
+
+for num in np.arange(0,nl2,3):
+    mat[it, 0] = np.max(sub_dados[num:num + 3, 2], axis=0)
+    mat[it, 1] = np.min(sub_dados[num:num + 3, 2], axis=0)
+    mat[it, 2] = np.mean(sub_dados[num:num + 3, 2], axis=0)
+    mat[it, 3] = np.var(sub_dados[num:num + 3, 2], axis=0)
+    it += 1 #incrementa + 1 no it
+
+
+#print(mat)
+
+np.set_printoptions(precision=2)
+np.set_printoptions(suppress=True)
+
+print('Genótipos     Max     Min      Média    Variância')
+matriz_concat = np.concatenate((genotipo, mat),axis=1)
+print (matriz_concat)
+
+import os
+#help (np.savetxt)
+np.savetxt("Matriz de dados.txt", matriz_concat, fmt='%2.2f', delimiter='\t')
+#np.savetxt('matriz_ex3.txt', matriz_concat, delimiter=' ')
+
+print("")
+print("---------------------------------------------------------------------------------------------------------------")
+print("")
+
+
+print("f) Obtenha os genótipos que possuem média (médias das repetições) igual ou superior a 500 da matriz gerada na letra anterior.")
+
+print("")
+print("                     Matriz ")
+print("___________________________________________________")
+
+print(" Genótipos     Max      Min      Média   Variância")
+print (matriz_concat)
+print("___________________________________________________")
+
+print("")
+print("")
+
+matriz_med_maior=matriz_concat[matriz_concat[:,3]>=500]
+print("Os genotipos que possuem média maior que 500 são: ",matriz_med_maior[:,0])
+
+print("")
+print("---------------------------------------------------------------------------------------------------------------")
+print("")
+
+
+
+print("g) Apresente os seguintes gráficos:")
+
+print("- Médias dos genótipos para cada variável. Utilizando o comando plt.subplot para mostrar mais de um grafico por figura")
+print("___________________________________________________")
+
+print("   GEN    REP    Var1   Var2   Var3   Var4   Var5")
+print("___________________________________________________")
+
+print(dados_ex4)
+print("___________________________________________________")
+
+print("")
+
+nl3,nc3= dados_ex4.shape
+mat_zeros=np.zeros((10,5))
+
+it = 0
+GEN = np.reshape(np.unique(dados_ex4[:,0], axis=0),(10,1))
+
+
+for num in np.arange(0,nl3,3):
+    mat_zeros[it, 0] = np.mean(dados_ex4[num:num + 3, 2], axis=0)
+    mat_zeros[it, 1] = np.mean(dados_ex4[num:num + 3, 3], axis=0)
+    mat_zeros[it, 2] = np.mean(dados_ex4[num:num + 3, 4], axis=0)
+    mat_zeros[it, 3] = np.mean(dados_ex4[num:num + 3, 5], axis=0)
+    mat_zeros[it, 4] = np.mean(dados_ex4[num:num + 3, 6], axis=0)
+
+    it += 1 #incrementa + 1 no it
+
+
+mat_concat = np.concatenate((GEN, mat_zeros),axis=1)
+
+print("")
+print("           Valor da Média das Variáveis")
+print("   GEN    REP    Var1   Var2   Var3   Var4   Var5")
+
+print("___________________________________________________")
+
+print(mat_concat)
+print("___________________________________________________")
+
+from matplotlib import pyplot as plt
+
+import os
+
+plt.style.use('ggplot')
+fig = plt.figure('Média dos Genótipos para cada variável')
+plt.subplot(2,3,1)
+plt.bar(mat_concat[:,0], mat_concat[:,1], width=0.8, color="tab:green")
+plt.title('Variável 1')
+plt.ylabel('Valor médio')
+plt.xlabel('Genótipo')
+
+plt.subplot(2,3,2)
+plt.bar(mat_concat[:,0], mat_concat[:,2], width=0.8, color="tab:red")
+plt.title('Variável 2')
+plt.ylabel('Valor médio')
+plt.xlabel('Genótipo')
+
+plt.subplot(2,3,3)
+plt.bar(mat_concat[:,0], mat_concat[:,3], width=0.8, color="tab:blue")
+plt.title('Variável 3')
+plt.ylabel('Valor médio')
+plt.xlabel('Genótipo')
+
+plt.subplot(2,3,4)
+plt.bar(mat_concat[:,0], mat_concat[:,4], width=0.8, color="tab:pink")
+plt.title('Variável 4')
+plt.ylabel('Valor  médio')
+plt.xlabel('Genótipo')
+plt.subplot(2,3,5)
+plt.bar(mat_concat[:,0], mat_concat[:,5], width=0.8, color="tab:purple")
+plt.title('Variável 5')
+plt.ylabel('Valor  médio')
+plt.xlabel('Genótipo')
+
+print("Disperão 2D da médias dos genótipos (Utilizar as três primeiras variáveis). "
+      "No eixo X uma variável e no eixo Y outra.")
+
+cores = ['black','blue','red','green','yellow','pink','cyan','orange','darkviolet','slategray']
+plt.style.use('ggplot')
+plt.style.use('ggplot')
+fig = plt.figure('Dispersão 2D das médias')
+nl_4,nc_4=mat_concat.shape
+
+
+plt.subplot(1,3,1)
+cores = ['black','blue','red','green','yellow','pink','cyan','orange','darkviolet','slategray']
+
+# https://matplotlib.org/3.1.0/gallery/color/named_colors.html
+
+for i in np.arange(0,nl_4,1):
+    plt.scatter(mat_concat[i,1], mat_concat[i,2], s=50, alpha=0.8, label = mat_concat[i,0], c = cores[i])
+
+plt.title('Dispersão ')
+plt.xlabel('Var 1')
+plt.ylabel('Var 2')
+plt.legend()
+plt.subplot(1,3,2)
+for i in np.arange(0,nl_4,1):
+    plt.scatter(mat_concat[i,1], mat_concat[i,3], s=50, alpha=0.8, label = mat_concat[i,0], c = cores[i])
+
+plt.title('Dispersão ')
+plt.xlabel('Var 1')
+plt.ylabel('Var 3')
+plt.legend()
+plt.subplot(1,3,3)
+for i in np.arange(0,nl_4,1):
+    plt.scatter(mat_concat[i,2], mat_concat[i,3], s=50, alpha=0.8, label = mat_concat[i,0], c = cores[i])
+
+plt.title('Dispersão ')
+plt.xlabel('Var 2')
+plt.ylabel('Var 3')
+plt.legend()
+plt.show()
+
+#Salvar grafico
+#nome = 'dispersao2D'
+#fig.savefig((nome+'.png'), bbox_inches="tight")
+#os.startfile(nome+'.png')
